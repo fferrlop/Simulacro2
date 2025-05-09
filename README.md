@@ -371,4 +371,178 @@ TCP implementa mecanismos para evitar la congestión de red y mantener un rendim
 
 **Contribución:** Evita la fragmentación y la sobrecarga innecesaria, mejorando la eficiencia cuando las ventanas son pequeñas.
 
+# Parte III: Capa de Aplicación y Aplicaciones Multimedia
 
+## Pregunta 11: Funcionamiento de DNS
+
+El proceso de resolución de nombres en DNS incluye los siguientes pasos:
+
+1. El usuario ingresa un dominio en el navegador (ej. www.ejemplo.com).
+2. El navegador consulta primero su caché local.
+3. Si no encuentra respuesta, pregunta al sistema operativo, que consulta su propia caché.
+4. Si no hay coincidencia, se realiza una consulta al servidor DNS configurado (normalmente el del ISP).
+5. Si el servidor DNS no conoce la respuesta:
+   - Consulta un servidor raíz.
+   - El servidor raíz responde con la dirección de un servidor TLD (.com, .org, etc.).
+   - El TLD responde con la dirección del servidor autoritativo del dominio.
+6. El servidor autoritativo proporciona la dirección IP del dominio.
+7. Esta IP se devuelve al navegador, que establece la conexión con el servidor correspondiente.
+
+---
+
+## Pregunta 12: Protocolos de Correo Electrónico
+
+| Protocolo | Función principal     | Tipo de uso/acceso        | Almacenamiento de correos                    | Ejemplo de uso                              |
+|----------|------------------------|----------------------------|---------------------------------------------|---------------------------------------------|
+| POP3     | Descargar correos      | Solo lectura desde un cliente | Localmente en el dispositivo cliente        | Usuario con conexión limitada o sincrónica  |
+| IMAP     | Gestionar correos remotos | Acceso desde múltiples dispositivos | En el servidor                             | Usuario con varios dispositivos             |
+| SMTP     | Enviar correos         | Salida de mensajes         | No almacena, solo transfiere mensajes       | Envío de correos desde cliente a servidor   |
+
+---
+
+## Pregunta 13: Funcionamiento de HTTP y FTP
+
+### a) HTTP
+
+HTTP es un protocolo sin estado basado en peticiones y respuestas entre cliente y servidor. Los métodos más comunes son:
+
+- **GET**: Solicita un recurso.
+- **POST**: Envía datos al servidor.
+- **PUT**: Reemplaza un recurso existente.
+- **DELETE**: Elimina un recurso.
+
+### b) FTP
+
+FTP (File Transfer Protocol) permite la transferencia de archivos. Usa dos conexiones:
+
+- **Canal de control**: para comandos y respuestas.
+- **Canal de datos**: para la transferencia de archivos.
+
+**Diferencias clave** con HTTP:
+- FTP mantiene estado de sesión y dos conexiones separadas.
+- HTTP usa una sola conexión por cada solicitud.
+
+---
+
+## Pregunta 14: Streaming y VoIP
+
+### a) Tipos de streaming
+
+| Tipo                   | Descripción                                         | Ejemplo                         |
+|------------------------|-----------------------------------------------------|----------------------------------|
+| UDP Streaming          | Transmisión en tiempo real, sin control de errores  | IPTV, videollamadas              |
+| HTTP Streaming         | Transmisión progresiva a través de HTTP             | YouTube                         |
+| Adaptive HTTP (DASH)   | Adapta la calidad al ancho de banda disponible      | Netflix, Amazon Prime           |
+
+### b) Funcionamiento de VoIP
+
+- Convierte voz analógica a digital.
+- Se comprime y empaqueta.
+- Se transmite usando RTP sobre UDP.
+- Se reconstruye en el receptor.
+
+**Problemas comunes**:
+- **Retardo**: se mitiga con QoS y priorización.
+- **Pérdida de paquetes**: uso de buffers y corrección de errores.
+- **Eco**: canceladores de eco en hardware/software.
+
+---
+
+## Pregunta 15: Control de Congestión en Redes Multimedia
+
+1. **Buffering en el cliente**:
+   - Almacena parte del contenido antes de reproducirlo.
+   - Previene interrupciones ante variaciones de red.
+
+2. **Marcado de paquetes (DiffServ)**:
+   - Clasifica paquetes con distintos niveles de prioridad.
+   - Asegura tratamiento diferenciado para flujos multimedia sensibles.
+
+---
+
+## Pregunta 16: Best-Effort vs Servicios Multiclase
+
+| Característica          | Best-Effort                          | Servicios Multiclase                    |
+|-------------------------|--------------------------------------|-----------------------------------------|
+| Manejo del tráfico      | Todos los paquetes tratados igual    | Priorización según tipo de tráfico      |
+| Garantía de calidad     | No garantiza QoS                     | Puede ofrecer garantías de QoS          |
+| Ejemplos de uso         | Navegación web, correo electrónico   | Videollamadas, streaming, VoIP          |
+
+---
+
+# Parte IV: Seguridad en Redes
+
+## Pregunta 17: Problemas de Seguridad en Redes
+
+| Área              | Descripción                                         | Solución habitual                  |
+|-------------------|-----------------------------------------------------|------------------------------------|
+| Confidencialidad  | Evitar acceso no autorizado a la información        | Cifrado (SSL/TLS, AES)             |
+| Autenticación     | Verificar identidad del usuario o sistema           | Contraseñas, tokens, MFA           |
+| No repudio        | Garantizar que un emisor no niegue su mensaje       | Firmas digitales                   |
+| Integridad        | Asegurar que el mensaje no ha sido alterado         | Hashing (SHA-256), HMAC            |
+
+---
+
+## Pregunta 18: Cifrado Simétrico vs Asimétrico
+
+| Característica         | Simétrico                      | Asimétrico                          |
+|------------------------|--------------------------------|--------------------------------------|
+| Nº de claves           | 1 clave compartida             | Par de claves (pública/privada)     |
+| Velocidad              | Rápido                         | Más lento                           |
+| Ejemplos               | AES, DES                       | RSA, ECC                            |
+| Aplicaciones típicas   | Cifrado de datos masivo        | Intercambio seguro de claves, firma |
+
+---
+
+## Pregunta 19: Funcionamiento del Algoritmo RSA
+
+### a) Proceso de generación de claves
+
+1. Elegir dos primos `p` y `q`.
+2. Calcular `n = p × q`.
+3. Calcular `ϕ(n) = (p-1)(q-1)`.
+4. Elegir `e` tal que sea coprimo con `ϕ(n)`.
+5. Calcular `d` como el inverso modular de `e` mod `ϕ(n)`.
+
+### b) Ejemplo con p=3, q=11, e=7, M=4
+
+1. `n = 3 × 11 = 33`
+2. `ϕ(n) = (3-1)(11-1) = 2 × 10 = 20`
+3. `e = 7`
+4. Buscar `d` tal que `7 × d ≡ 1 mod 20` → `d = 3`
+5. Cifrado: `C = M^e mod n = 4^7 mod 33 = 16384 mod 33 = 16`
+6. Descifrado: `M = C^d mod n = 16^3 mod 33 = 4096 mod 33 = 4`
+
+---
+
+## Pregunta 20: Firewalls, VPN e IPSec
+
+### a) Firewall
+
+- **Filtrado de paquetes**: inspecciona encabezados de IP y decide permitir o denegar.
+- **Firewall de estado**: guarda el estado de conexiones activas para decisiones más inteligentes.
+
+Ambos protegen de accesos no autorizados.
+
+### b) VPN vs IPSec
+
+| Característica     | VPN                                 | IPSec                                 |
+|--------------------|--------------------------------------|----------------------------------------|
+| Propósito          | Crear túnel seguro entre redes       | Proveer cifrado a nivel de red         |
+| Funcionamiento     | Usa protocolos como PPTP, L2TP, SSL  | Funciona en modo transporte o túnel    |
+| Ejemplo de uso     | Acceso remoto de usuarios móviles    | Conexión cifrada entre routers         |
+
+---
+
+## Pregunta 21: SSL/TLS y DNS Spoofing
+
+### a) SSL/TLS
+
+- Protocolo que cifra la comunicación entre cliente y servidor.
+- Se usa en HTTPS para garantizar confidencialidad, autenticación e integridad.
+- Involucra handshake con intercambio de claves y establecimiento de sesión segura.
+
+### b) DNS Spoofing y DNSSEC
+
+- **DNS Spoofing**: ataque que suplanta una respuesta DNS legítima por una falsa.
+- **DNSSEC**: protege la integridad de las respuestas DNS mediante firmas digitales, asegurando que provienen de fuentes legítimas.
