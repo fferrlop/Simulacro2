@@ -63,7 +63,8 @@ El **enrutamiento por inundación** es una técnica en la que cada nodo reenvía
 | Requiere conocimiento de la red| Sí (matriz de costos)                 | No                                     |
 | Complejidad computacional       | Alta (O(n²) o mejor con estructuras)  | Baja, pero elevado coste de red        |
 
-![Comparación: Dijkstra vs Enrutamiento por Inundación](Comparación_ Dijkstra vs Enrutamiento por Inundación - visual selection.png)
+
+![Comparación_ Dijkstra vs Enrutamiento por Inundación - visual selection](https://github.com/user-attachments/assets/cccafc7f-be9d-4cec-978d-6539860578f0)
 
 
 ## Pregunta 2: Cálculo de Direcciones de Broadcast y Subredes
@@ -281,8 +282,7 @@ Entonces, al tomar prestados 2 bits del campo de host, se pueden crear 4 subrede
 2. **SYN-ACK:** el servidor responde con un segmento con los flags SYN y ACK.
 3. **ACK:** el cliente envía un ACK final y la conexión se establece.
 
-![Three-Way Handshake](Establecimiento y Terminación de Conexión en TCP - visual selection.png)
-
+![Establecimiento y Terminación de Conexión en TCP - visual selection (1)](https://github.com/user-attachments/assets/b1846e5b-df92-47d0-8b24-0640e78642be)
 
 
 ### Terminación (Four-Way Handshake)
@@ -292,8 +292,8 @@ Entonces, al tomar prestados 2 bits del campo de host, se pueden crear 4 subrede
 3. **FIN:** el receptor envía su propio FIN para cerrar su lado.
 4. **ACK:** el iniciador responde con ACK final.
 
-![Four-Way Handshake](Establecimiento y Terminación de Conexión en TCP - visual selection (1).png)
 
+![Establecimiento y Terminación de Conexión en TCP - visual selection](https://github.com/user-attachments/assets/adcf94db-d751-422e-84e2-531e88c5c451)
 
 
 Cada paso asegura una finalización ordenada y confiable de la conexión.
@@ -399,8 +399,8 @@ El proceso de resolución de nombres en DNS incluye los siguientes pasos:
 6. El servidor autoritativo proporciona la dirección IP del dominio.
 7. Esta IP se devuelve al navegador, que establece la conexión con el servidor correspondiente.
 
-![Funcionamiento de DNS](Funcionamiento de DNS - visual selection.png)
 
+![Funcionamiento de DNS - visual selection](https://github.com/user-attachments/assets/33948c09-9d8e-45c6-9e91-d3937ddbe9a0)
 
 
 ---
