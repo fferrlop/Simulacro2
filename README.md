@@ -1,5 +1,9 @@
 # Simulacro2
 
+Enlace página:https://fferrlop.github.io/Simulacro2/
+
+Enlace repositorio: https://github.com/fferrlop/Simulacro2.git
+
 # Parte I: Capa de Red
 
 ## Pregunta 1: Cálculo de Ruta Más Corta
