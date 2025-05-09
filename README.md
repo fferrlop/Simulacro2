@@ -295,3 +295,80 @@ Cada paso asegura una finalización ordenada y confiable de la conexión.
 
 - **Multiplexación descendente (demultiplexación):** cuando los datos llegan a un dispositivo, la capa de transporte los entrega al proceso correcto mediante el número de puerto. Ejemplo: un servidor web escucha en el puerto 80 y otro servicio en el puerto 443.
 
+## Pregunta 9: Cálculo del Tamaño de Ventana en TCP
+
+Se tiene un enlace con los siguientes parámetros:
+
+- **RTT** = 50 ms
+- **Ancho de banda** = 100 Mbps
+- **MSS (Tamaño máximo de segmento)** = 1,500 bytes
+
+### Paso 1: Convertir unidades
+
+- RTT = 50 ms = 0.05 segundos
+- Ancho de banda = 100 Mbps = 100 × 10^6 bits por segundo
+
+### Paso 2: Calcular el tamaño óptimo de la ventana
+
+Fórmula:
+
+```
+Ventana óptima (bits) = Ancho de banda × RTT
+                      = 100,000,000 bps × 0.05 s
+                      = 5,000,000 bits
+```
+
+Convertimos a bytes:
+
+```
+5,000,000 bits ÷ 8 = 625,000 bytes
+```
+
+### Paso 3: Calcular número de segmentos MSS simultáneos
+
+```
+Número de MSS = Ventana óptima (bytes) ÷ MSS
+              = 625,000 ÷ 1,500
+              ≈ 416.67 segmentos
+```
+
+### Resultado
+
+- Ventana óptima: **625,000 bytes**
+- Número de MSS simultáneos: **≈ 417 segmentos**
+
+---
+
+## Pregunta 10: Control de Congestión en TCP
+
+TCP implementa mecanismos para evitar la congestión de red y mantener un rendimiento óptimo. A continuación se describen tres algoritmos clave:
+
+### Algoritmo de Arranque Lento (Slow Start)
+
+**Objetivo:** Aumentar gradualmente la tasa de envío para evitar sobrecargar la red al inicio de una conexión.
+
+**Funcionamiento:** TCP comienza con una ventana de congestión pequeña (generalmente 1 MSS) y la duplica con cada ACK recibido hasta llegar al umbral de congestión (ssthresh), momento en el que cambia a crecimiento lineal (congestion avoidance).
+
+**Contribución:** Permite que TCP detecte rápidamente la capacidad de la red sin generar congestión excesiva.
+
+---
+
+### Algoritmo de Nagle
+
+**Objetivo:** Reducir el número de pequeños segmentos enviados por la red (problema conocido como "silly window syndrome").
+
+**Funcionamiento:** Acumula pequeños datos hasta que se ha recibido un ACK o se alcanza el MSS, y entonces los envía juntos.
+
+**Contribución:** Mejora la eficiencia de la red reduciendo la sobrecarga y la fragmentación.
+
+---
+
+### Algoritmo de Clark
+
+**Objetivo:** Prevenir el envío de segmentos pequeños cuando el receptor anuncia una ventana pequeña.
+
+**Funcionamiento:** El emisor no envía datos hasta que tenga suficiente espacio para un segmento completo (MSS) o hasta que pueda enviar todos los datos pendientes.
+
+**Contribución:** Evita la fragmentación y la sobrecarga innecesaria, mejorando la eficiencia cuando las ventanas son pequeñas.
+
+
