@@ -394,6 +394,9 @@ El proceso de resolución de nombres en DNS incluye los siguientes pasos:
 6. El servidor autoritativo proporciona la dirección IP del dominio.
 7. Esta IP se devuelve al navegador, que establece la conexión con el servidor correspondiente.
 
+![Funcionamiento de DNS - visual selection](https://github.com/user-attachments/assets/d54c12c4-d16f-4a7f-b1e1-35686d63b0be)
+
+
 ---
 
 ## Pregunta 12: Protocolos de Correo Electrónico
