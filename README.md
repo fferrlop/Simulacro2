@@ -278,12 +278,18 @@ Entonces, al tomar prestados 2 bits del campo de host, se pueden crear 4 subrede
 2. **SYN-ACK:** el servidor responde con un segmento con los flags SYN y ACK.
 3. **ACK:** el cliente envía un ACK final y la conexión se establece.
 
+![Establecimiento y Terminación de Conexión en TCP - visual selection](https://github.com/user-attachments/assets/fdd6b22e-329f-4259-9dfd-d9c639caadee)
+
+
 ### Terminación (Four-Way Handshake)
 
 1. **FIN:** el host que quiere terminar envía un segmento con FIN.
 2. **ACK:** el receptor responde con ACK.
 3. **FIN:** el receptor envía su propio FIN para cerrar su lado.
 4. **ACK:** el iniciador responde con ACK final.
+
+![Establecimiento y Terminación de Conexión en TCP - visual selection](https://github.com/user-attachments/assets/c0f08e5f-eda3-4541-8466-47aec5797ea0)
+
 
 Cada paso asegura una finalización ordenada y confiable de la conexión.
 
