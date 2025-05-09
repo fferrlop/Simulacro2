@@ -63,6 +63,9 @@ El **enrutamiento por inundación** es una técnica en la que cada nodo reenvía
 | Requiere conocimiento de la red| Sí (matriz de costos)                 | No                                     |
 | Complejidad computacional       | Alta (O(n²) o mejor con estructuras)  | Baja, pero elevado coste de red        |
 
+![Comparación_ Dijkstra vs Enrutamiento por Inundación - visual selection](https://github.com/user-attachments/assets/462a0568-1d73-469b-85b1-2422ed6e20eb)
+
+
 ## Pregunta 2: Cálculo de Direcciones de Broadcast y Subredes
 
 ### a) Subred 172.29.152.0 con máscara 255.255.248.0
