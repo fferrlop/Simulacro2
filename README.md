@@ -171,3 +171,127 @@ Broadcast: 172.18.27.255
 
 **Justificación**: El bloque `/23` une dos redes `/24`, por lo que la última IP del segundo bloque (`172.18.27.255`) actúa como dirección de broadcast para todo el conjunto.
 
+## Pregunta 3: Última Dirección Válida y Rango de Hosts
+
+### a) Subred 172.30.67.192 con máscara 255.255.255.192
+
+Máscara en binario:
+
+```
+255.255.255.192 = 11111111.11111111.11111111.11000000
+```
+
+Esta es una máscara **/26**, lo que implica `2^6 = 64` direcciones totales. La subred empieza en `172.30.67.192`, por lo tanto:
+
+- Rango: `172.30.67.192 – 172.30.67.255`
+- Dirección de broadcast: `172.30.67.255`
+- Última dirección de host válida: `172.30.67.254`
+
+### b) Host 172.22.53.199 con máscara 255.255.252.0
+
+Máscara en binario:
+
+```
+255.255.252.0 = 11111111.11111111.11111100.00000000
+```
+
+Esta es una máscara **/22**, con bloques de `2^10 = 1024` direcciones. El cuarto octeto varía de 0 a 255, y el tercer octeto varía en bloques de 4:
+
+- `53 / 4 = 13`, por lo que la subred empieza en `172.22.52.0`
+- Rango: `172.22.52.0 – 172.22.55.255`
+- Rango de hosts válidos: `172.22.52.1 – 172.22.55.254`
+
+---
+
+## Pregunta 4: Capacidad y Segmentación de Subredes
+
+### a) Red 172.26.0.0 con máscara 255.255.255.192
+
+Máscara en binario:
+
+```
+255.255.255.192 = 11111111.11111111.11111111.11000000
+```
+
+Esto es una máscara **/26**, lo que da `2^6 = 64` direcciones totales por subred.
+
+- Hosts utilizables: `64 - 2 = 62` equipos (se restan red y broadcast)
+
+### b) Host 172.18.171.190/23
+
+Máscara `/23` equivale a `255.255.254.0`, cubre bloques de 512 direcciones.
+
+- El tercer octeto `171` -> `171 / 2 = 85.5`, por lo tanto, bloque comienza en `170`
+- Subred: `172.18.170.0/23`
+- Rango: `172.18.170.0 – 172.18.171.255`
+
+---
+
+## Pregunta 5: Número de Subredes Necesarias
+
+La fórmula para calcular el número de subredes disponibles es:
+
+```
+Número de subredes = 2^s
+```
+
+Donde `s` es el número de bits tomados prestados del identificador de host para usarse como identificador de subred.
+
+### Ejemplo:
+
+Si se necesitan al menos 4 subredes:
+
+```
+2^s ≥ 4  →  s = 2 bits (porque 2^2 = 4)
+```
+
+Entonces, al tomar prestados 2 bits del campo de host, se pueden crear 4 subredes distintas.
+
+---
+
+# Parte II: Capa de Transporte
+
+## Pregunta 6: Comparación entre TCP y UDP
+
+### a) Comparación
+
+| Característica                 | TCP                                      | UDP                                |
+|-------------------------------|------------------------------------------|------------------------------------|
+| Conexión                      | Requiere establecimiento (orientado a conexión) | No requiere conexión               |
+| Fiabilidad                    | Garantiza entrega y orden                | No garantiza entrega ni orden      |
+| Control de errores            | Sí, con retransmisiones                  | No                                 |
+| Control de flujo/congestión   | Sí                                       | No                                 |
+| Velocidad                     | Más lento                                | Más rápido                         |
+
+### b) Ejemplos de aplicaciones que usan UDP
+
+1. **Streaming de video/audio en tiempo real (ej. IPTV, VoIP):** la baja latencia es prioritaria, incluso si se pierden algunos paquetes.
+2. **DNS (Domain Name System):** las consultas son pequeñas y rápidas, y no requieren una conexión establecida.
+
+---
+
+## Pregunta 7: Establecimiento y Terminación de Conexión en TCP
+
+### Establecimiento (Three-Way Handshake)
+
+1. **SYN:** el cliente envía un segmento con el flag SYN al servidor.
+2. **SYN-ACK:** el servidor responde con un segmento con los flags SYN y ACK.
+3. **ACK:** el cliente envía un ACK final y la conexión se establece.
+
+### Terminación (Four-Way Handshake)
+
+1. **FIN:** el host que quiere terminar envía un segmento con FIN.
+2. **ACK:** el receptor responde con ACK.
+3. **FIN:** el receptor envía su propio FIN para cerrar su lado.
+4. **ACK:** el iniciador responde con ACK final.
+
+Cada paso asegura una finalización ordenada y confiable de la conexión.
+
+---
+
+## Pregunta 8: Multiplexación y Demultiplexación
+
+- **Multiplexación ascendente:** múltiples procesos (puertos) envían datos a través de una única conexión de red. Ejemplo: varios servicios en una máquina comparten una sola IP.
+
+- **Multiplexación descendente (demultiplexación):** cuando los datos llegan a un dispositivo, la capa de transporte los entrega al proceso correcto mediante el número de puerto. Ejemplo: un servidor web escucha en el puerto 80 y otro servicio en el puerto 443.
+
